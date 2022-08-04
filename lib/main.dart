@@ -1,22 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/views/auth/landing_customer_screen.dart';
-
-const MaterialColor yellowColor = MaterialColor(
-  0xFFFDD835,
-  <int, Color>{
-    50: Color(0xFFFFFDE7),
-    100: Color(0xFFFFFDE7),
-    200: Color(0xFFFFFDE7),
-    300: Color(0xFFFFF9C4),
-    400: Color(0xFFFFF59D),
-    500: Color(0xFFFFF176),
-    600: Color(0xFFFFEE58),
-    700: Color(0xFFFDD835),
-    800: Color(0xFFFBC02D),
-    900: Color(0xFFF9A825),
-  },
-);
+import 'package:flutter_project/views/auth/customer_login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding
@@ -33,10 +17,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme:
-            ThemeData(primarySwatch: yellowColor, fontFamily: 'Dosis-Regular'),
-        home: LandingCustomerScreen());
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Dosis-Regular'),
+      home: CustomerLoginScreen(),
+    );
   }
 }

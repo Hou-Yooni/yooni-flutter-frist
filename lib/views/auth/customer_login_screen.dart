@@ -1,60 +1,23 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously, unused_field
 
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_project/views/auth/customer_login_screen.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../controllers/auth_controllers.dart';
-import '../../controllers/snack_bar_controllers.dart';
+import 'landing_customer_screen.dart';
 
 // ignore: use_key_in_widget_constructors
-class LandingCustomerScreen extends StatefulWidget {
+class CustomerLoginScreen extends StatefulWidget {
   @override
-  State<LandingCustomerScreen> createState() => _LandingCustomerScreenState();
+  State<CustomerLoginScreen> createState() => _CustomerLoginScreenState();
 }
 
-class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
+class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
   final AuthController _authController = AuthController();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   bool passwordVisible = true;
   bool isLoading = false;
-  Uint8List? _image;
-
-  pickImageFromGallery() async {
-    Uint8List im = await _authController
-        .pickImage(ImageSource.gallery); //用於從 Uint8List 獲取圖片
-    setState(() {
-      _image = im;
-    });
-  }
-
-  pickImageFromCamera() async {
-    Uint8List im = await _authController
-        .pickImage(ImageSource.camera); //用於從 Uint8List 獲取圖片
-    setState(() {
-      _image = im;
-    });
-  }
-
-  signUp() async {
-    setState(() {
-      isLoading = true;
-    });
-    String res = await _authController.signUpUsers(_fullNameController.text,
-        _emailController.text, _passwordController.text, _image);
-    setState(() {
-      isLoading = false;
-    });
-    if (res != 'success') {
-      return snackBar(res, context);
-    } else {
-      print('You have navigated to the Home Screen');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +34,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "Create Customer's Account",
+                    "Sign in to Customer's Account",
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -89,62 +52,10 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                 ],
               ),
               Row(
-                children: [
-                  _image != null
-                      ? CircleAvatar(
-                          radius: 60,
-                          backgroundColor:
-                              const Color.fromARGB(255, 235, 194, 80),
-                          backgroundImage: MemoryImage(_image!),
-                        )
-                      : const CircleAvatar(
-                          radius: 60,
-                          backgroundColor: Color.fromARGB(255, 235, 194, 80),
-                        ),
-                  const SizedBox(
+                children: const [
+                  SizedBox(
                     width: 10,
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 235, 194, 80),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15)),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            pickImageFromCamera();
-                          },
-                          icon: const Icon(
-                            Icons.camera_alt,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 235, 194, 80),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15)),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            pickImageFromGallery();
-                          },
-                          icon: const Icon(
-                            Icons.photo,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
                 ],
               ),
               const SizedBox(
@@ -152,16 +63,6 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
               ),
               Column(
                 children: [
-                  TextFormField(
-                    controller: _fullNameController,
-                    decoration: InputDecoration(
-                      labelText: 'Full Name',
-                      hintText: 'Enter your full name',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -208,9 +109,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                   ),
                   // ignore: sized_box_for_whitespace
                   GestureDetector(
-                    onTap: () {
-                      signUp();
-                    },
+                    onTap: () {},
                     child: Container(
                       width: MediaQuery.of(context).size.width - 40,
                       height: 50,
@@ -223,7 +122,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                             ? const CircularProgressIndicator(
                                 color: Colors.white)
                             : const Text(
-                                'Sign up',
+                                'Login',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -237,19 +136,18 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Aleady have an account?',
+                        'Need an account?',
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                CustomerLoginScreen(),
-                          ));
+                              builder: (BuildContext context) =>
+                                  LandingCustomerScreen()));
                         },
                         child: const Text(
-                          'Login',
+                          'Sing up',
                           style: TextStyle(
                             color: Color.fromARGB(255, 235, 194, 80),
                           ),
