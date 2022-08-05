@@ -65,4 +65,21 @@ class AuthController {
     }
     return res;
   }
+
+  Future<String> loginUsers(String email, String password) async {
+    String res = 'some error occured';
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = 'success';
+        print('Login successfully');
+      } else {
+        res = 'Please fiels must not be empty';
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
 }

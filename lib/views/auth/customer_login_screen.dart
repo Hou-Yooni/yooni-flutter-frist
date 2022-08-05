@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously, unused_field
 
 import 'package:flutter/material.dart';
+import 'package:flutter_project/controllers/snack_bar_controllers.dart';
+import 'package:flutter_project/views/customer_home_screen.dart';
 
 import '../../controllers/auth_controllers.dart';
 import 'landing_customer_screen.dart';
@@ -18,6 +20,26 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   bool passwordVisible = true;
   bool isLoading = false;
+
+  //user登入
+  loginUsers() async {
+    setState(() {
+      isLoading = true;
+    });
+    String res = await _authController.loginUsers(
+        _emailController.text, _passwordController.text);
+    setState(() {
+      isLoading = false;
+    });
+
+    if (res != 'success') {
+      return snackBar(res, context);
+    } else {
+      return Navigator.of(context).push(MaterialPageRoute(
+          // ignore: prefer_const_constructors
+          builder: (BuildContext context) => CustomerHomeScreen()));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +131,9 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                   ),
                   // ignore: sized_box_for_whitespace
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      loginUsers();
+                    },
                     child: Container(
                       width: MediaQuery.of(context).size.width - 40,
                       height: 50,

@@ -24,6 +24,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
   bool isLoading = false;
   Uint8List? _image;
 
+  // 開啟圖片庫
   pickImageFromGallery() async {
     Uint8List im = await _authController
         .pickImage(ImageSource.gallery); //用於從 Uint8List 獲取圖片
@@ -32,6 +33,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
     });
   }
 
+  // 開啟相機
   pickImageFromCamera() async {
     Uint8List im = await _authController
         .pickImage(ImageSource.camera); //用於從 Uint8List 獲取圖片
@@ -40,6 +42,7 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
     });
   }
 
+  // 註冊
   signUp() async {
     setState(() {
       isLoading = true;
@@ -52,7 +55,8 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
     if (res != 'success') {
       return snackBar(res, context);
     } else {
-      print('You have navigated to the Home Screen');
+      return Navigator.of(context).push(MaterialPageRoute(
+          builder: (BuildContext context) => CustomerLoginScreen()));
     }
   }
 

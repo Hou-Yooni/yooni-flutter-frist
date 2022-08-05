@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/views/auth/customer_login_screen.dart';
+import 'package:flutter_project/views/customer_home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Dosis-Regular'),
-      home: CustomerLoginScreen(),
+      home: const CustomerHomeScreen(),
     );
   }
 }
