@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_project/views/auth/landing_customer_screen.dart';
 import 'package:flutter_project/views/customer_home_screen.dart';
 
 void main() async {
@@ -14,17 +17,22 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        // ignore: prefer_const_constructors
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Dosis-Regular'),
-      home: const CustomerHomeScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Dosis-Regular',
+      ),
+      initialRoute: CustomerHomeScreen.routeName,
+      routes: {
+        CustomerHomeScreen.routeName: (context) => const CustomerHomeScreen(),
+        LandingCustomerScreen.routeName: (context) => LandingCustomerScreen(),
+      },
     );
   }
 }

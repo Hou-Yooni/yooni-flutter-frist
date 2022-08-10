@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors, unused_field
 
 import 'package:flutter/material.dart';
+import 'package:flutter_project/views/cart_screen.dart';
+import 'package:flutter_project/views/category_screen.dart';
 import 'package:flutter_project/views/home_screen.dart';
 import 'package:flutter_project/views/profile_screen.dart';
 
 class CustomerHomeScreen extends StatefulWidget {
+  //靜態全局變量 靜態局部變量只會被初始化一次，下次使用依據上一次保存的值
+  static const String routeName = 'CustomerHomeScreen';
   const CustomerHomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,9 +22,9 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   //列表集合資料
   final List<Widget> _page = [
     HomeScreen(),
-    Center(child: Text('Category Screen')),
+    CategoryScreen(),
     Center(child: Text('Shop Screen')),
-    Center(child: Text('Cart Screen')),
+    CartScreen(),
     ProfileScreen(),
   ];
 

@@ -35,9 +35,12 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
     if (res != 'success') {
       return snackBar(res, context);
     } else {
-      return Navigator.of(context).push(MaterialPageRoute(
-          // ignore: prefer_const_constructors
-          builder: (BuildContext context) => CustomerHomeScreen()));
+      // return Navigator.of(context).push(MaterialPageRoute(
+      //     // ignore: prefer_const_constructors
+      //     builder: (BuildContext context) => CustomerHomeScreen()));
+
+      return Navigator.of(context).pushNamedAndRemoveUntil(
+          CustomerHomeScreen.routeName, (route) => false);
     }
   }
 

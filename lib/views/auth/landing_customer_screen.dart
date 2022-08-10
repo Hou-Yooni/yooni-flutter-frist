@@ -11,6 +11,7 @@ import '../../controllers/snack_bar_controllers.dart';
 
 // ignore: use_key_in_widget_constructors
 class LandingCustomerScreen extends StatefulWidget {
+  static const String routeName = 'LandingCustomerScreen';
   @override
   State<LandingCustomerScreen> createState() => _LandingCustomerScreenState();
 }
