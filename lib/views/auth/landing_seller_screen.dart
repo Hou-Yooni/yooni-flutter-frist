@@ -95,13 +95,22 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
             _image = null;
           });
         } else {
+          setState(() {
+            isLoading = false;
+          });
           return snackBar('Please Pick Image', context);
         }
       } else {
+        setState(() {
+          isLoading = false;
+        });
         return snackBar('Please Pick Image', context);
       }
-    } catch (e) {
-      print(e);
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      return snackBar(e.code, context);
     }
   }
 

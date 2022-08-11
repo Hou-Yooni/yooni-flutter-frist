@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_project/controllers/snack_bar_controllers.dart';
+import 'package:flutter_project/views/auth/landing_seller_screen.dart';
 import 'package:flutter_project/views/customer_home_screen.dart';
 
 import '../../controllers/auth_controllers.dart';
@@ -195,7 +196,12 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                             fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            LandingSellerScreen.routeName,
+                          );
+                        },
                         child: const Text(
                           'Sing up',
                           style: TextStyle(
