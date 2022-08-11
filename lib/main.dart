@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_project/views/auth/landing_customer_screen.dart';
+import 'package:flutter_project/views/auth/landing_seller_screen.dart';
+import 'package:flutter_project/views/auth/seller_login_screen.dart';
 import 'package:flutter_project/views/customer_home_screen.dart';
 
 void main() async {
@@ -28,10 +30,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Dosis-Regular',
       ),
-      initialRoute: CustomerHomeScreen.routeName,
+      initialRoute: LandingSellerScreen.routeName,
       routes: {
         CustomerHomeScreen.routeName: (context) => const CustomerHomeScreen(),
         LandingCustomerScreen.routeName: (context) => LandingCustomerScreen(),
+        LandingSellerScreen.routeName: (context) => LandingSellerScreen(),
+        SellerLoginScreen.routeName: (context) => SellerLoginScreen(),
       },
     );
   }

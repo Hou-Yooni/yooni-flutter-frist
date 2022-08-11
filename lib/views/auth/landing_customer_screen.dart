@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_project/views/auth/customer_login_screen.dart';
+import 'package:flutter_project/views/auth/landing_seller_screen.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../controllers/auth_controllers.dart';
@@ -275,7 +276,10 @@ class _LandingCustomerScreenState extends State<LandingCustomerScreen> {
                             fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, LandingSellerScreen.routeName);
+                        },
                         child: const Text(
                           'Sing up',
                           style: TextStyle(
