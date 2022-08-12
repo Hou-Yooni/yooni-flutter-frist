@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
 class DashboardScreen extends StatefulWidget {
-  static const String routeName = 'DashboardScreen';
-
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }

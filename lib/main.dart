@@ -7,7 +7,6 @@ import 'package:flutter_project/views/auth/landing_customer_screen.dart';
 import 'package:flutter_project/views/auth/landing_seller_screen.dart';
 import 'package:flutter_project/views/auth/seller_login_screen.dart';
 import 'package:flutter_project/views/customer_home_screen.dart';
-import 'package:flutter_project/views/dashboard_screen.dart';
 import 'package:flutter_project/views/seller_home_screen.dart';
 
 void main() async {
@@ -30,16 +29,18 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        colorScheme: ThemeData().colorScheme.copyWith(
+              primary: Color.fromARGB(255, 235, 194, 80),
+            ),
         fontFamily: 'Dosis-Regular',
       ),
-      initialRoute: DashboardScreen.routeName,
+      initialRoute: SellerHomeScreen.routeName,
       routes: {
         CustomerHomeScreen.routeName: (context) => const CustomerHomeScreen(),
         LandingCustomerScreen.routeName: (context) => LandingCustomerScreen(),
         LandingSellerScreen.routeName: (context) => LandingSellerScreen(),
         SellerLoginScreen.routeName: (context) => SellerLoginScreen(),
         SellerHomeScreen.routeName: (context) => SellerHomeScreen(),
-        DashboardScreen.routeName: (context) => DashboardScreen(),
       },
     );
   }

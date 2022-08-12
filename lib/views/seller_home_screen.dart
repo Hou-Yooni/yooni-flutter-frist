@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/views/category_screen.dart';
 import 'package:flutter_project/views/dashboard_screen.dart';
 import 'package:flutter_project/views/home_screen.dart';
+import 'package:flutter_project/views/upload_product.dart';
 
 class SellerHomeScreen extends StatefulWidget {
   //靜態全局變量 靜態局部變量只會被初始化一次，下次使用依據上一次保存的值
@@ -24,7 +25,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
     CategoryScreen(),
     Center(child: Text('Shop Screen')),
     DashboardScreen(),
-    Center(child: Text('Upload Screen')),
+    UploadProductScreen()
   ];
 
   @override
