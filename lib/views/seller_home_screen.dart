@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_project/views/category_screen.dart';
+import 'package:flutter_project/views/dashboard_screen.dart';
 import 'package:flutter_project/views/home_screen.dart';
 
 class SellerHomeScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
     HomeScreen(),
     CategoryScreen(),
     Center(child: Text('Shop Screen')),
-    Center(child: Text('Dashboard Screen')),
+    DashboardScreen(),
     Center(child: Text('Upload Screen')),
   ];
 
