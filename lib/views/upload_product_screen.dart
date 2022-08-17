@@ -14,6 +14,7 @@ class UploadProductScreen extends StatefulWidget {
 class _UploadProductScreenState extends State<UploadProductScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final ImagePicker _picker = ImagePicker();
+  String mainCategory = 'men';
 
   late double price;
   late int quantity;
@@ -37,12 +38,49 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
   }
 
   Widget displayImages() {
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: imageList!.length,
-        itemBuilder: (context, index) {
-          return Image.file(File(imageList![index].path));
+    if (imageList!.isNotEmpty) {
+      return InkWell(
+        onTap: () {
+          setState(() {
+            imageList = null;
+          });
+        },
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: imageList!.length,
+            itemBuilder: (context, index) {
+              return Image.file(File(imageList![index].path));
+            }),
+      );
+    } else {
+      return const Center(
+        child: Text(
+          'You Have not \n \n Picked any Images',
+          style: TextStyle(
+            fontSize: 15,
+          ),
+        ),
+      );
+    }
+  }
+
+  void uploadProduct() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      if (imageList!.isNotEmpty) {
+        print(price);
+        print(quantity);
+
+        setState(() {
+          imageList = [];
         });
+        _formKey.currentState!.reset();
+      } else {
+        return snackBar('Please Pick images', context);
+      }
+    } else {
+      return snackBar('Please Fields must must not be empty', context);
+    }
   }
 
   @override
@@ -72,6 +110,28 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                               ),
                       ),
                     ),
+                    Column(
+                      children: [
+                        const Text('Select Main Category'),
+                        DropdownButton(
+                          value: mainCategory,
+                          items: const [
+                            DropdownMenuItem(value: 'men', child: Text('men')),
+                            DropdownMenuItem(
+                                value: 'women', child: Text('women')),
+                            DropdownMenuItem(
+                                value: 'kids', child: Text('kids')),
+                            DropdownMenuItem(
+                                value: 'shose', child: Text('shose')),
+                          ],
+                          onChanged: (String? value) {
+                            setState(() {
+                              mainCategory = value!;
+                            });
+                          },
+                        )
+                      ],
+                    )
                   ],
                 ),
                 const SizedBox(
@@ -101,8 +161,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      onChanged: (value) {
-                        price = double.parse(value);
+                      onSaved: (value) {
+                        price = double.parse(value!);
                       },
                     ),
                   ),
@@ -127,8 +187,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      onChanged: (value) {
-                        quantity = int.parse(value);
+                      onSaved: (value) {
+                        quantity = int.parse(value!);
                       },
                     ),
                   ),
@@ -152,8 +212,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      onChanged: (value) {
-                        productName = value;
+                      onSaved: (value) {
+                        productName = value!;
                       },
                     ),
                   ),
@@ -179,8 +239,8 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      onChanged: (value) {
-                        productDescription = value;
+                      onSaved: (value) {
+                        productDescription = value!;
                       },
                     ),
                   ),
@@ -207,17 +267,7 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
           ),
           FloatingActionButton(
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                print(price);
-                print(quantity);
-                print(productName);
-                print(productDescription);
-              } else {
-                return snackBar(
-                  'Please Fields Must not be left empty',
-                  context,
-                );
-              }
+              uploadProduct();
             },
             backgroundColor: const Color.fromARGB(255, 235, 194, 80),
             child: const Icon(
