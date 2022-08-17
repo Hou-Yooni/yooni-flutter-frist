@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             ),
         fontFamily: 'Dosis-Regular',
       ),
-      initialRoute: SellerHomeScreen.routeName,
+      initialRoute: SellerLoginScreen.routeName,
       routes: {
         CustomerHomeScreen.routeName: (context) => const CustomerHomeScreen(),
         LandingCustomerScreen.routeName: (context) => LandingCustomerScreen(),

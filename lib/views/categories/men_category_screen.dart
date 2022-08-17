@@ -30,7 +30,7 @@ class MenCategoryScreen extends StatelessWidget {
             crossAxisSpacing: 5,
             mainAxisSpacing: 60,
             children: List.generate(
-              men.length,
+              men.length - 1,
               (index) {
                 return GestureDetector(
                   onTap: () {
@@ -39,7 +39,7 @@ class MenCategoryScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) {
                           return SubCategoryScreen(
-                            subCategoryName: men[index],
+                            subCategoryName: men[index + 1],
                             mainCcategory: 'Men',
                           );
                         },
@@ -56,7 +56,7 @@ class MenCategoryScreen extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      Text(men[index])
+                      Text(men[index + 1])
                     ],
                   ),
                 );
