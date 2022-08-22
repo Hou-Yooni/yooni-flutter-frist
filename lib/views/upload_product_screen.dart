@@ -84,6 +84,10 @@ class _UploadProductScreenState extends State<UploadProductScreen> {
       subCategoryList = men;
     } else if (value == 'women') {
       subCategoryList = women;
+    } else if (value == 'kids') {
+      subCategoryList = kids;
+    } else if (value == 'shose') {
+      subCategoryList = shose;
     }
     setState(() {
       mainCategoryValue = value!;

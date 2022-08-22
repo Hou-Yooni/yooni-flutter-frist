@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/views/gallery/kids_gallery_screen.dart';
+import 'package:flutter_project/views/gallery/men_gallery_screen.dart';
+import 'package:flutter_project/views/gallery/shose_gallery_screen.dart';
+import 'package:flutter_project/views/gallery/women_gallery_screen.dart';
 
 import 'inner_screens/search_screen.dart';
 
@@ -10,6 +14,7 @@ class HomeScreen extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        backgroundColor: Colors.grey.withOpacity(0.05),
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -76,18 +81,10 @@ class HomeScreen extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            Center(
-              child: Text('Men Category'),
-            ),
-            Center(
-              child: Text('Women Category'),
-            ),
-            Center(
-              child: Text('Kids Category'),
-            ),
-            Center(
-              child: Text('Shose Category'),
-            ),
+            MenGalleryScreen(),
+            WomenGalleryScreen(),
+            KidsGalleryScreen(),
+            ShoseGalleryScreen()
           ],
         ),
       ),
