@@ -4,6 +4,7 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
+import '../widgets/full_images_screen.dart';
 import '../widgets/product_modal.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -24,20 +25,42 @@ class ProductDetailScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
-                child: Swiper(
-                  itemCount: images.length,
-                  pagination: const SwiperPagination(
-                    builder: DotSwiperPaginationBuilder(
-                      color: Colors.grey,
-                      activeColor: Color.fromARGB(255, 235, 194, 80),
+              Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return FullImagesScreen(imageList: images);
+                      }));
+                    },
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      child: Swiper(
+                        itemCount: images.length,
+                        pagination: const SwiperPagination(
+                          builder: DotSwiperPaginationBuilder(
+                            color: Colors.grey,
+                            activeColor: Color.fromARGB(255, 235, 194, 80),
+                          ),
+                        ),
+                        itemBuilder: (context, index) {
+                          return Image.network(images[index]);
+                        },
+                      ),
                     ),
                   ),
-                  itemBuilder: (context, index) {
-                    return Image.network(images[index]);
-                  },
-                ),
+                  Positioned(
+                    top: 5,
+                    left: 10,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios),
+                    ),
+                  )
+                ],
               ),
               Text(
                 productList['productName'],
