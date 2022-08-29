@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/views/category_screen.dart';
 import 'package:flutter_project/views/dashboard_screen.dart';
 import 'package:flutter_project/views/home_screen.dart';
+import 'package:flutter_project/views/store_screen.dart';
 import 'package:flutter_project/views/upload_product_screen.dart';
 
 class SellerHomeScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
   final List<Widget> _page = [
     HomeScreen(),
     CategoryScreen(),
-    Center(child: Text('Shop Screen')),
+    StoreScreen(),
     DashboardScreen(),
     UploadProductScreen()
   ];
