@@ -59,7 +59,7 @@ class _MenGalleryScreenState extends State<MenGalleryScreen> {
             itemCount: snapshot.data!.docs.length,
             crossAxisCount: 2,
             itemBuilder: (BuildContext context, int index) {
-              return ProductModal(snapshot, index);
+              return ProductModal(snapshot, index, context);
             },
             staggeredTileBuilder: (context) => const StaggeredTile.fit(1),
           ),
