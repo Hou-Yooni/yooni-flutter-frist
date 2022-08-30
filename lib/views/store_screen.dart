@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/views/minor_screens/visit_store_screen.dart';
 
 class StoreScreen extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -32,29 +33,40 @@ class StoreScreen extends StatelessWidget {
                 mainAxisSpacing: 25,
               ),
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    SizedBox(
-                      height: 120,
-                      width: 120,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          snapshot.data!.docs[index]['image'],
-                          height: 120,
-                          fit: BoxFit.fill,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VisitStoreScreen(
+                            sellerUid: snapshot.data!.docs[index]['sellerUid']),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 120,
+                        width: 120,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(
+                            snapshot.data!.docs[index]['image'],
+                            height: 120,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      snapshot.data!.docs[index]['storeName'],
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
+                      Text(
+                        snapshot.data!.docs[index]['storeName'],
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      )
+                    ],
+                  ),
                 );
               },
             );

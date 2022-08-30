@@ -49,18 +49,16 @@ class _KidsGalleryScreenState extends State<KidsGalleryScreen> {
           );
         }
 
-        return SingleChildScrollView(
-          child: StaggeredGridView.countBuilder(
-            //設為true 僅佔用它需要的空間（當有更多項目時它仍會滾動）
-            //設為flase 會嘗試填充父元素提供的所有可用空間，即使列表項需要更少的空間
-            shrinkWrap: true,
-            itemCount: snapshot.data!.docs.length,
-            crossAxisCount: 2,
-            itemBuilder: (BuildContext context, int index) {
-              return ProductModal(snapshot, index, context);
-            },
-            staggeredTileBuilder: (context) => const StaggeredTile.fit(1),
-          ),
+        return StaggeredGridView.countBuilder(
+          //設為true 僅佔用它需要的空間（當有更多項目時它仍會滾動）
+          //設為flase 會嘗試填充父元素提供的所有可用空間，即使列表項需要更少的空間
+          shrinkWrap: true,
+          itemCount: snapshot.data!.docs.length,
+          crossAxisCount: 2,
+          itemBuilder: (BuildContext context, int index) {
+            return ProductModal(snapshot, index, context);
+          },
+          staggeredTileBuilder: (context) => const StaggeredTile.fit(1),
         );
       },
     );
